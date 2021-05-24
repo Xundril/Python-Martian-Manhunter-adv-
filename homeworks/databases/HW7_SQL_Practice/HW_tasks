@@ -1,0 +1,118 @@
+1. Insert dump of shop.sql to your local database
+
+mikhail@mikhail-VirtualBox:~/PycharmProjects/Python-Martian-Manhunter-adv-/homeworks/databases$ sudo mysql -u root -p shop < shop.sql;
+Enter password:
+mikhail@mikhail-VirtualBox:~/PycharmProjects/Python-Martian-Manhunter-adv-/homeworks/databases$ sudo mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.25-0ubuntu0.20.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_items           |
+| mysql              |
+| performance_schema |
+| shop               |
+| sys                |
++--------------------+
+6 rows in set (0,22 sec)
+
+2. Modify table products add user_id as foreign key
+
+mysql> ALTER TABLE products ADD COLUMN user_id INT;
+Query OK, 0 rows affected (0,04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE products ADD FOREIGN KEY (user_id) REFERENCES users(id);
+Query OK, 1 row affected (0,05 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> SHOW COLUMNS FROM products;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(255) | NO   |     | NULL    |                |
+| meta_title  | char(255)    | YES  |     | NULL    |                |
+| description | varchar(400) | YES  |     | NULL    |                |
+| price       | double       | NO   |     | NULL    |                |
+| old_price   | double       | YES  |     | NULL    |                |
+| is_active   | tinyint(1)   | YES  |     | NULL    |                |
+| user_id     | int          | YES  | MUL | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+8 rows in set (0,12 sec)
+
+mysql> INSERT INTO users (first_name, last_name, email, is_admin) VALUES ("Mikhail", "Chabanenko", "Mikhail@gmail.com", 0);
+Query OK, 1 row affected (0,05 sec)
+
+mysql> UPDATE products SET user_id=1 WHERE id=1;
+Query OK, 1 row affected (0,01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM users;
++----+------------+------------+---------------------------+----------+
+| id | first_name | last_name  | email                     | is_admin |
++----+------------+------------+---------------------------+----------+
+|  1 | Liubomyr   | Luzhnyi    | lubomur.luzhnuy@gmail.com |        1 |
+|  2 | Mikhail    | Chabanenko | Mikhail@gmail.com         |        0 |
++----+------------+------------+---------------------------+----------+
+2 rows in set (0,02 sec)
+
+mysql> SELECT * FROM products;
++----+-------+----------------------+-------------------------------------------------+----------+-----------+-----------+---------+
+| id | title | meta_title           | description                                     | price    | old_price | is_active | user_id |
++----+-------+----------------------+-------------------------------------------------+----------+-----------+-----------+---------+
+|  1 | Rolex | Rolex | Watch | Shop | bla bla bla bla bla bla bla bla bla bla bla bla | 14000.25 |      NULL |         1 |       1 |
++----+-------+----------------------+-------------------------------------------------+----------+-----------+-----------+---------+
+1 row in set (0,01 sec)
+
+mysql> INSERT INTO products (title, meta_title, description, price, is_active, user_id) VALUES ("Timex", "Timex | Watch | Shop", "bla bla bla bla", 3820.70, 1, 2);
+Query OK, 1 row affected (0,03 sec)
+
+mysql> INSERT INTO products (title, meta_title, description, price, is_active, user_id) VALUES ("Honda", "Honda | Motorcycle | Shop", "bla bla bla bla", 80000, 1, 1);
+Query OK, 1 row affected (0,04 sec)
+
+mysql> INSERT INTO products (title, meta_title, description, price, is_active, user_id) VALUES ("Scott", "Scott | Bicycle | Shop", "bla
+ bla bla bla bla bla", 33000, 1, 2);
+Query OK, 1 row affected (0,04 sec)
+
+mysql> SELECT * FROM products;
++----+-------+---------------------------+-------------------------------------------------+----------+-----------+-----------+---------+
+| id | title | meta_title                | description                                     | price    | old_price | is_active | user_id |
++----+-------+---------------------------+-------------------------------------------------+----------+-----------+-----------+---------+
+|  1 | Rolex | Rolex | Watch | Shop      | bla bla bla bla bla bla bla bla bla bla bla bla | 14000.25 |      NULL |         1 |       1 |
+|  2 | Timex | Timex | Watch | Shop      | bla bla bla bla                                 |   3820.7 |      NULL |         1 |       2 |
+|  3 | Honda | Honda | Motorcycle | Shop | bla bla bla bla                                 |    80000 |      NULL |         1 |       1 |
+|  4 | Scott | Scott | Bicycle | Shop    | bla bla bla bla bla bla                         |    33000 |      NULL |         1 |       2 |
++----+-------+---------------------------+-------------------------------------------------+----------+-----------+-----------+---------+
+4 rows in set (0,14 sec)
+
+3. Select users their products, collections and images and write this query to file.
+
+mysql> SELECT users.first_name, users.last_name, products.title ,c.title , product_images.file FROM products LEFT JOIN users ON products.user_id=users.id LEFT JOIN product_images ON product_images.product_id=products.id LEFT JOIN categories_products cp ON cp.product_id=products.id LEFT JOIN categories c ON c.id=cp.category_id ORDER BY users.first_name,users.last_name;
++------------+------------+-------+------------+------------------------------------------------------------------------------------+
+| first_name | last_name  | title | title      | file                                                                               |
++------------+------------+-------+------------+------------------------------------------------------------------------------------+
+| Liubomyr   | Luzhnyi    | Rolex | Watch      | 2https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg  |
+| Liubomyr   | Luzhnyi    | Rolex | Watch      | 11https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg |
+| Liubomyr   | Luzhnyi    | Rolex | Watch      | https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg   |
+| Liubomyr   | Luzhnyi    | Honda | Motorcycle | https://Motorcycles.jpg                                                            |
+| Mikhail    | Chabanenko | Timex | Watch      | 3https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg  |
+| Mikhail    | Chabanenko | Scott | Bicycle    | https://Bicycles.jpg                                                               |
++------------+------------+-------+------------+------------------------------------------------------------------------------------+
+6 rows in set (0,00 sec)
+
+mysql> SELECT users.first_name, products.title, c.title, pi.file FROM users INNER JOIN products ON users.id=products.user_id INNER JOIN categories_products as cp ON cp.product_id=products.id INNER JOIN categories as c ON c.id=cp.category_id INNER JOIN product_images as pi ON pi.product_id=products.id INTO OUTFILE '/var/lib/mysql-files/HW_Task3.txt';
+
