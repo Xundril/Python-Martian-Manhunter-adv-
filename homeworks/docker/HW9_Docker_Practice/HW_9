@@ -1,0 +1,112 @@
+1. Save the ubuntu images to a tar/zip archive and then extract the layers and metadata files from them.(Tip: use `docker save -o` command)
+
+mikhail@mikhail-VirtualBox:~/PycharmProjects/Python-Martian-Manhunter-adv-/homeworks/docker/HW9_Docker_Practice$ docker save -o ubuntu.tar ubuntu
+
+mikhail@mikhail-VirtualBox:~/PycharmProjects/Python-Martian-Manhunter-adv-/homeworks/docker/HW9_Docker_Practice$ ls
+Dockerfile  ubuntu.tar
+
+mikhail@mikhail-VirtualBox:~/PycharmProjects/Python-Martian-Manhunter-adv-/homeworks/docker/HW9_Docker_Practice$ ls -sh ubuntu.tar
+72M ubuntu.tar
+
+mikhail@mikhail-VirtualBox:~/PycharmProjects/Python-Martian-Manhunter-adv-/homeworks/docker/HW9_Docker_Practice$ tar -xvf ubuntu.tar -C ubuntu/
+2ae7aa944634fefcfd5b886827d742268228e070238fb405b4d846b266060dbb/
+2ae7aa944634fefcfd5b886827d742268228e070238fb405b4d846b266060dbb/VERSION
+2ae7aa944634fefcfd5b886827d742268228e070238fb405b4d846b266060dbb/json
+2ae7aa944634fefcfd5b886827d742268228e070238fb405b4d846b266060dbb/layer.tar
+6e04f1f804d0d621b5a098dc2ecb5bcc7515cdf7f13d530a12fab11a194cfc72/
+6e04f1f804d0d621b5a098dc2ecb5bcc7515cdf7f13d530a12fab11a194cfc72/VERSION
+6e04f1f804d0d621b5a098dc2ecb5bcc7515cdf7f13d530a12fab11a194cfc72/json
+6e04f1f804d0d621b5a098dc2ecb5bcc7515cdf7f13d530a12fab11a194cfc72/layer.tar
+7e0aa2d69a153215c790488ed1fcec162015e973e49962d438e18249d16fa9bd.json
+f3f2ad580f7e6eb71163e45a6cbef2d6b82377e274e5193ff5708f506e9322bc/
+f3f2ad580f7e6eb71163e45a6cbef2d6b82377e274e5193ff5708f506e9322bc/VERSION
+f3f2ad580f7e6eb71163e45a6cbef2d6b82377e274e5193ff5708f506e9322bc/json
+f3f2ad580f7e6eb71163e45a6cbef2d6b82377e274e5193ff5708f506e9322bc/layer.tar
+manifest.json
+repositories
+
+mikhail@mikhail-VirtualBox:~/PycharmProjects/Python-Martian-Manhunter-adv-/homeworks/docker/HW9_Docker_Practice$ ls ubuntu
+2ae7aa944634fefcfd5b886827d742268228e070238fb405b4d846b266060dbb  7e0aa2d69a153215c790488ed1fcec162015e973e49962d438e18249d16fa9bd.json  manifest.json
+6e04f1f804d0d621b5a098dc2ecb5bcc7515cdf7f13d530a12fab11a194cfc72  f3f2ad580f7e6eb71163e45a6cbef2d6b82377e274e5193ff5708f506e9322bc       repositories
+
+2*. Run a container that outputs the current date and time in Rome. Should be only Dockerfile.(Tip: user 'tzdata' library)
+
+mikhail@mikhail-VirtualBox:~/PycharmProjects/Python-Martian-Manhunter-adv-/homeworks/docker/HW9_Docker_Practice$ docker build . -t time-rome
+Sending build context to Docker daemon  150.2MB
+Step 1/4 : FROM ubuntu:20.04
+ ---> 7e0aa2d69a15
+Step 2/4 : RUN apt-get update && apt-get install -y tzdata
+ ---> Running in 46c49327275c
+Get:1 http://archive.ubuntu.com/ubuntu focal InRelease [265 kB]
+Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease [101 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [177 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/restricted amd64 Packages [33.4 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 Packages [1275 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [728 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [11.3 MB]
+Get:10 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [27.6 kB]
+Get:11 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [835 kB]
+Get:12 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [274 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [29.8 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [975 kB]
+Get:15 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [1248 kB]
+Get:16 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [299 kB]
+Get:17 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [4305 B]
+Fetched 17.8 MB in 11s (1665 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  tzdata
+0 upgraded, 1 newly installed, 0 to remove and 5 not upgraded.
+Need to get 295 kB of archives.
+After this operation, 4033 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 tzdata all 2021a-0ubuntu0.20.04 [295 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 295 kB in 0s (855 kB/s)
+Selecting previously unselected package tzdata.
+(Reading database ... 4121 files and directories currently installed.)
+Preparing to unpack .../tzdata_2021a-0ubuntu0.20.04_all.deb ...
+Unpacking tzdata (2021a-0ubuntu0.20.04) ...
+Setting up tzdata (2021a-0ubuntu0.20.04) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.30.0 /usr/local/share/perl/5.30.0 /usr/lib/x86_64-linux-gnu/perl5/5.30 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.30 /usr/share/perl/5.30 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Configuring tzdata
+------------------
+
+Please select the geographic area in which you live. Subsequent configuration
+questions will narrow this down by presenting a list of cities, representing
+the time zones in which they are located.
+
+  1. Africa      4. Australia  7. Atlantic  10. Pacific  13. Etc
+  2. America     5. Arctic     8. Europe    11. SystemV
+  3. Antarctica  6. Asia       9. Indian    12. US
+Geographic area:
+Use of uninitialized value $_[1] in join or string at /usr/share/perl5/Debconf/DbDriver/Stack.pm line 111.
+
+Current default time zone: '/UTC'
+Local time is now:      Tue Jun  1 19:16:39 UTC 2021.
+Universal Time is now:  Tue Jun  1 19:16:39 UTC 2021.
+Run 'dpkg-reconfigure tzdata' if you wish to change it.
+
+Use of uninitialized value $val in substitution (s///) at /usr/share/perl5/Debconf/Format/822.pm line 83, <GEN6> line 4.
+Use of uninitialized value $val in concatenation (.) or string at /usr/share/perl5/Debconf/Format/822.pm line 84, <GEN6> line 4.
+Removing intermediate container 46c49327275c
+ ---> 6e91180ff71b
+Step 3/4 : ENV TZ=Europe/Rome
+ ---> Running in 66b8d4abc294
+Removing intermediate container 66b8d4abc294
+ ---> 8ea4074e1213
+Step 4/4 : CMD date
+ ---> Running in e2e794d59220
+Removing intermediate container e2e794d59220
+ ---> 2cf58c0f863b
+Successfully built 2cf58c0f863b
+Successfully tagged time-rome:latest
