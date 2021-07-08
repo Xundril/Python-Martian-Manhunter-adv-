@@ -1,5 +1,5 @@
-import datetime
 import os
+import datetime
 from app import app, api, db
 from flask import render_template, request, Response, redirect
 from config import Config, articles
@@ -24,6 +24,27 @@ def article_create():
     return render_template('blog/article_create.html')
 
 
+@app.route('/user/registration')
+def user_registration():
+    return render_template('blog/User_registration.html')
+
+
+@app.route('/user/regist', methods=["POST"])
+def user_regist():
+    data = request.form
+
+    user = User(
+        username=data.get('username'),
+        email=data.get('email'),
+        bio=data.get('bio'),
+        created=datetime.date.today().strftime('%Y-%m-%d-%H:%M:%S'),
+        admin=False
+    )
+
+    db.session.add(user)
+    db.session.commit()
+    return redirect("/")
+
 @app.route('/article/store', methods=["POST"])
 def article_store():
     data = request.form
@@ -44,24 +65,3 @@ def article_store():
     db.session.add(article)
     db.session.commit()
     return redirect("/")
-
-
-@app.route('/user/registration')
-def user_registration():
-    return render_template('blog/user_registration.html')
-
-
-@app.route('/user/new', methods=["POST"])
-def user_new():
-    data = request.form
-    user = User(
-        username=data.get('username'),
-        email=data.get('email'),
-        bio=data.get('bio'),
-        created=str(datetime.datetime.now()),
-        admin=False
-    )
-
-    db.session.add(user)
-    db.session.commit()
-    return redirect('/')

@@ -2,42 +2,74 @@
 <html lang="en">
 <head>
     {% include 'blog/shared/head.html' %}
-    <title>User registration</title>
+    <title>Register</title>
 </head>
 <body>
 {% include 'blog/shared/header.html' %}
 
 <div class="container">
-    <h1>User registration</h1>
-    <form class="needs-validation" novalidate action="/user/new" method="POST" enctype="multipart/form-data">
+    <h1>Register</h1>
+    <form class="needs-validation" novalidate action="/user/regist" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" required class="form-control" id="username" name="username" placeholder="Input your name">
+            <input type="text" required class="form-control" id="username" name="username" placeholder="Kek">
+            <p class="help-block">Username can contain any letters or numbers, without spaces</p>
             <div class="valid-feedback">
-                Looks good!
+                Done!
             </div>
             <div class="invalid-feedback">
-                Empty username
+                Empty name
             </div>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" required class="form-control" id="email" name="email" placeholder="Input your email">
+            <input type="text" required class="form-control" id="email" name="email" placeholder="email@email.com">
+            <p class="help-block">Please provide your E-mail</p>
             <div class="valid-feedback">
-                Looks good!
+                Done!
             </div>
             <div class="invalid-feedback">
                 Empty email
             </div>
         </div>
+        <div class="form-group">
             <label for="bio">Biography</label>
-            <textarea required class="form-control" id="bio" name="bio" rows="3" placeholder="Tell about yourself"></textarea>
+            <textarea required class="form-control" id="bio" name="bio" rows="5"></textarea>
             <div class="invalid-feedback">
                 Empty biography
             </div>
+        </div>
+        <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" for="password">Password</label>
+      <div class="controls">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Pa$$word">
+        <p class="help-block">Password should be 6 or more characters</p>
+          <div class="valid-feedback">
+                Done!
+            </div>
+            <div class="invalid-feedback">
+                Empty name
+            </div>
+      </div>
+    </div>
 
-        <div class="btn-group mg-top-sm col-sm-12" role="group" aria-label="User registration">
-            <button type="submit" class="btn btn-primary">Registration</button>
+    <div class="control-group">
+      <!-- Password -->
+      <label class="control-label"  for="password_confirm">Password (Confirm)</label>
+      <div class="controls">
+        <input type="password" class="form-control" id="password_confirm" name="password_confirm"  placeholder="Pa$$word">
+        <p class="help-block">Please confirm password</p>
+          <div class="valid-feedback">
+                Done!
+            </div>
+            <div class="invalid-feedback">
+                Empty name
+            </div>
+      </div>
+    </div>
+        <div class="btn-group mg-top-sm col-sm-12" role="group" aria-label="Create User">
+            <button type="submit" class="btn btn-primary">Register</button>
         </div>
     </form>
 </div>
