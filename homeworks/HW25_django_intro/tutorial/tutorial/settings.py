@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'apps.restaurants'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +77,18 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django_orm',
+        'USER': 'django_orm',
+        'PASSWORD': 'django_orm',
+        'HOST': 'localhost',
+        'PORT': 5432,
+        'TEST': {
+            'HOST': 'localhost',
+            'PORT': 5432,
+            'NAME': 'django_orm_test_db',
+            'USER': 'django_orm',
+         }
     }
 }
 
