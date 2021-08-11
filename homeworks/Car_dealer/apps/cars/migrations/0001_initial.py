@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=80, unique=True)),
-                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cars.brand', verbose_name='models')),
+                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dealers.brand', verbose_name='models')),
             ],
             options={
                 'verbose_name': 'Model',
@@ -99,12 +99,12 @@ class Migration(migrations.Migration):
                 ('sitting_place', models.PositiveSmallIntegerField(default=4)),
                 ('first_registration_date', models.DateTimeField(auto_now_add=True)),
                 ('engine_power', models.PositiveSmallIntegerField()),
-                ('color', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cars', to='cars.color')),
-                ('dealer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cars', to='dealers.dealer')),
-                ('fuel', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cars', to='cars.fueltype')),
-                ('model', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cars', to='cars.model')),
-                ('picture', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cars', to='cars.picture')),
-                ('property', models.ManyToManyField(to='cars.Property')),
+                ('color', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dealers', to='dealers.color')),
+                ('dealer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dealers', to='dealers.dealer')),
+                ('fuel', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dealers', to='dealers.fueltype')),
+                ('model', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dealers', to='dealers.model')),
+                ('picture', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dealers', to='dealers.picture')),
+                ('property', models.ManyToManyField(to='dealers.Property')),
             ],
             options={
                 'verbose_name': 'Car',

@@ -1,0 +1,14 @@
+<h1>Dealer: {{ object.title }}</h1>
+<div>
+    <p>Email: {{ object.e_mail }}</p>
+    <p>City: {{ object.city.name }}</p>
+    <p>Country: {{ object.city.country.name }}</p>
+    <p>Cars:</p>
+    <ul>
+        {% for car in object.cars.all %}
+        <li>{{ car.model.brand.name }} {{ car.model.name }}</li>
+        {% empty %}
+        <li>No cars have been added yet.</li>
+        {% endfor %}
+    </ul>
+</div>

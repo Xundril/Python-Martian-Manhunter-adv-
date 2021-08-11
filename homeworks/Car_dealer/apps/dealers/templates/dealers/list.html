@@ -1,0 +1,13 @@
+<h1>Dealers</h1>
+<div>
+    <ul>
+        {% for dealer in dealers %}
+        <li>
+            <p><a href="{% url 'dealers:dealer_detail' dealer.id %}">{{ dealer.title }}</a></p>
+            <p>Email: {{ dealer.e_mail }}</p>
+        </li>
+        {% empty %}
+        <li>No dealers have been added yet.</li>
+        {% endfor %}
+    </ul>
+</div>

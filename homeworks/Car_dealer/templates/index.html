@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealer</title>
+</head>
+<body>
+<h1>Looking for a new car or decided to buy your first car? Then you are on the right track! We have a large selection
+    of both new and used cars for sale from all over the world!</h1>
+<p>For more information, please tap the link bellow:</p>
+<ul>
+    <li><a href="{% url 'cars:car_list' %}">Cars</a></li>
+    <li><a href="{% url 'dealers:dealer_list' %}">Dealers</a></li>
+    <li><a href="{% url 'orders:order_list' %}">Orders</a></li>
+</ul>
+</body>
+</html>

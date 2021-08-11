@@ -1,0 +1,8 @@
+<h1>Order: {{ object.first_name }} {{ object.last_name }}</h1>
+<div>
+    <p>Email: {{ object.email }}</p>
+    <p>Status: {{ object.status }}</p>
+    <p>Phone: {{ object.phone }}</p>
+    <p>Message: {{ object.message }}</p>
+    <p>Car: {{ object.car.model.brand.name }} {{ object.car.model.name }}</p>
+</div>
