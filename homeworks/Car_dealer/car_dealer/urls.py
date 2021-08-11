@@ -36,6 +36,10 @@ urlpatterns = [
         include('apps.dealers.urls', namespace='dealers')
     ),
     path(
+        'newsletters/',
+        include('apps.newsletters.urls', namespace='newsletters')
+    ),
+    path(
         'orders/',
         include('apps.orders.urls', namespace='orders')
     ),

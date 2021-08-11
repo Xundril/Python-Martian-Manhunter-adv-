@@ -1,0 +1,7 @@
+<h1>To receive notifications with the latest news, enter your email in the field below:</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Subscribe">
+</form>
+<p><a href="/">Back to main page >>></a></p>
