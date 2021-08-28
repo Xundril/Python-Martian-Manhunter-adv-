@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
     'apps.cars',
     'apps.dealers',
+    'apps.newsletters',
     'apps.orders',
 ]
 
@@ -53,7 +54,9 @@ ROOT_URLCONF = 'car_dealer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

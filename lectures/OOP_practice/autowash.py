@@ -122,7 +122,7 @@ class Worker(WorkerMeta):
 
 
 # wash_type, vehicle_type, additional_service
-# bikes, cars, buses, trucks, workers
+# bikes, dealers, buses, trucks, workers
 bike_instance_0 = Vehicle('Outside', 'bike', True)
 worker_instance_0 = Worker('John', bike_instance_0)
 car_wash_instance = PepperWash(workers=[worker_instance_0], bikes=[bike_instance_0])

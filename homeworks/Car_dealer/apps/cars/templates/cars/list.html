@@ -1,0 +1,26 @@
+<h1>Cars</h1>
+<div>
+    <table style="border-spacing: 15px 5px">
+        <thead>
+        <tr>
+            <th>Dealer</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+        <tr>
+            <td>{{ car.dealer.title }}</td>
+            <td>{{ car.model.brand.name }}</td>
+            <td>{{ car.model.name }}</td>
+            <td>{{ car.price }}</td>
+            <td><a href="{% url 'cars:car_detail' car.slug %}">More info...</a></td>
+        </tr>
+        {% empty %}
+        <tr>No cars have been added yet.</tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

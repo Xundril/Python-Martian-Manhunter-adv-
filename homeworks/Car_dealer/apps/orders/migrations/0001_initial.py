@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('cars', '0001_initial'),
+        ('dealers', '0001_initial'),
     ]
 
     operations = [
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=254)),
                 ('phone', models.CharField(max_length=16, validators=[django.core.validators.RegexValidator(regex='^\\+?1?\\d{8,15}$')])),
                 ('message', models.TextField(blank=True)),
-                ('car', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to='cars.car')),
+                ('car', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to='dealers.car')),
             ],
             options={
                 'verbose_name': 'Order',

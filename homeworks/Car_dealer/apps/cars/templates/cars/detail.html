@@ -1,0 +1,22 @@
+<h1>Car: {{ object.model.brand.name }} {{ object.model.name }}</h1>
+<div>
+    <ul>
+        <li>Dealer: {{ object.dealer.title }}</li>
+        <li>Color: {{ object.color.name }}</li>
+        <li>Brand: {{ object.brand.name }}</li>
+        <li>Model: {{ object.model.name }}</li>
+        <li>Property: {{ object.property.name }}</li>
+        <li>Price {{ object.price }}</li>
+        <li>Status: {{ object.status }}</li>
+        <li>Number: {{ object.number }}</li>
+        <li>Pollutant Class: {{ object.pollutant_class }}</li>
+        <li>Engine Type: {{ object.engine_type }}</li>
+        <li>Engine Power: {{ object.engine_power }}</li>
+        <li>Capacity: {{ object.capacity }}</li>
+        <li>Gear Case: {{ object.gear_case }}</li>
+        <li>Fuel Type: {{ object.fuel.fuel_type }}</li>
+        <li>Doors: {{ object.doors }}</li>
+        <li>Sitting Place: {{ object.sitting_place }}</li>
+        <li>Registration Date: {{ object.first_registration_date }}</li>
+    </ul>
+</div>
